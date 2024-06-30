@@ -1,0 +1,39 @@
+<title>weather api</title>
+</head>
+<body>
+  <!-- 
+    <input type="text" name="" id="input"/>
+   <button id="btn" onclick="getWeather()">getWeather</button>
+</body>div id="displayData"></div>-->
+
+
+
+
+
+    <script src="app.js"></script>
+</body>
+</html>
+--------------------------------------------------------------------------
+
+const api_key='24e10047a1e21ddd97f8398e52f4345a';
+const div=document.getElementById('displayData')
+
+const getWeather = async()=>{
+
+div.innerHTML="<h1>Loading......</h1>"
+const input=document.getElementById('input').value 
+const api=`https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${api_key}`  
+const response = await fetch(api)
+const data = await response.json()
+console.log(data)
+showData(data)
+}
+
+const showData=(data)=>{
+div.innerHTML=`
+<h1>${data.name}</h1>
+<img src="http://openweathermap.org/img/wn/10d@2x.png">
+<h2>${data.main.temp}</h2>
+<h3>${data.weather[0].main}</h3>
+`
+}
